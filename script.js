@@ -145,27 +145,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateNumber(element, finalNumber) {
         let current = 0;
-        const duration = 3500; // Tăng lên 3.5 giây
-        const steps = 35; // Tăng số bước
+        const duration = 3500; // 3.5 giây
+        const steps = 35;
         const interval = duration / steps;
+        let stepCount = 0;
 
         const animation = setInterval(() => {
+            stepCount++;
             current = Math.floor(Math.random() * 10).toString();
             element.textContent = current;
 
-            // Phát âm thanh tick mỗi lần số thay đổi
-            tickSound.currentTime = 0;
-            tickSound.play();
+            // Phát âm thanh tick với tần suất thấp hơn để tránh quá ồn
+            if (stepCount % 3 === 0) {
+                tickSound.currentTime = 0;
+                tickSound.volume = 0.3; // Giảm âm lượng
+                tickSound.play();
+            }
 
-            if (current === finalNumber) {
+            // Khi gần kết thúc, tăng khả năng hiện số cuối cùng
+            if (stepCount > steps * 0.8 && Math.random() < 0.3) {
+                current = finalNumber;
+            }
+
+            if (stepCount >= steps) {
                 clearInterval(animation);
+                element.textContent = finalNumber;
             }
         }, interval);
-
-        setTimeout(() => {
-            clearInterval(animation);
-            element.textContent = finalNumber;
-        }, duration);
     }
 
     function spin() {
@@ -179,11 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate one random number between 1-3000
         const finalNumber = generateRandomNumber();
 
-        // Animate each digit
+        // Animate all digits simultaneously
         digits.forEach((digit, index) => {
-            setTimeout(() => {
-                animateNumber(digit, getDigitAtPosition(finalNumber, index));
-            }, index * 800); // Tăng delay giữa các số
+            animateNumber(digit, getDigitAtPosition(finalNumber, index));
         });
 
         // Enable button after animation
