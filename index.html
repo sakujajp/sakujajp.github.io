@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quay Số Trúng Thưởng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <img src="images/title.png" alt="Quay Số Trúng Thưởng" class="title-image">
+    </div>
+
+    <div class="container">
+        <div class="number-container">
+            <div class="number-box">
+                <div class="number" id="digit1">1</div>
+            </div>
+            <div class="number-box">
+                <div class="number" id="digit2">2</div>
+            </div>
+            <div class="number-box">
+                <div class="number" id="digit3">3</div>
+            </div>
+            <div class="number-box">
+                <div class="number" id="digit4">5</div>
+            </div>
+        </div>
+
+        <button id="spinButton" class="spin-button">QUAY SỐ</button>
+    </div>
+
+    <div class="mascot">
+        <img src="images/em-be.png" alt="Em bé" class="mascot-image">
+    </div>
+
+    <div class="particles"></div>
+
+    <!-- Audio elements -->
+    <audio id="spinSound" preload="auto">
+        <source src="sounds/spin.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="winSound" preload="auto">
+        <source src="sounds/win.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="tickSound" preload="auto">
+        <source src="sounds/tick.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
